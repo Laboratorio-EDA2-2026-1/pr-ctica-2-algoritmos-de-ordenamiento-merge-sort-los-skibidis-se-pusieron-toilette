@@ -59,10 +59,56 @@ int main() {
 
 // ---- Implementa aquí tu función mergeSort ----
 void mergeSort(int arr[], int left, int right) {
-    // TODO
+    if (left >= right){             // Si el array ya es de tamaño 1 o ya esta ordenado se regresa
+        return;
+    }
+    int q = (left + right)/2;
+
+    // Se divide el array en dos hasta llegar a arreglos de 1 y 2
+    mergeSort(arr, left, q);
+    mergeSort(arr, q+1, right);
+    merge(arr, left, q, right);
 }
 
 // ---- Implementa aquí tu función merge ----
 void merge(int arr[], int left, int mid, int right) {
-    // TODO
+    int nL , nR;
+    nL = mid-left+1;
+    nR = right-mid;                 // Declaracion de Ns
+
+    int L[nL], R[nR];
+    for (int i=0 ;i<nL;i++){
+        L[i] = arr[left+i];         // Se guardan los datos eb L y N para ordenarse
+    }
+    for (int j=0 ; j<nR ; j++){
+        R[j] = arr[mid + j + 1];
+    }
+    int i = 0, j=0, k = left;
+
+
+    // Ordenamiento del array
+    while(i<nL && j< nR){
+        if (L[i]<R[j]){
+            arr[k] = L[i];
+            i++;
+        }
+        else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+
+        while(i<nL){
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+        while (j<nR){
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+
+    }
+
 }
